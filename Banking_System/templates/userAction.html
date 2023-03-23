@@ -1,0 +1,181 @@
+
+<!-- ========== Modal For User  Account ========== -->
+<div class="modal" id="UserAccount">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-info">
+          <h4 class="modal-title text-danger fw-bold">User Account Details</h4>
+          <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            {% for i in Active_User %}
+                <h6 class="fw-bold text-warning">Username :- {{ i.UserName }}</h6><hr>
+                <h6 class="fw-bold text-success">FullName :- {{ i.FullName }}</h6>
+                <h6 class="fw-bold text-success">DOB :- {{ i.DOB }}</h6>
+                <h6 class="fw-bold text-success">Gender :- {{ i.Gender }}</h6>
+                <h6 class="fw-bold text-success">Email Id :- {{ i.Email }}</h6>
+                <h6 class="fw-bold text-success">Mobile No :- {{ i.Mobile }}</h6>
+                <h6 class="fw-bold text-success">Adhar No :- {{ i.AdharNo }} </h6>
+                <h6 class="fw-bold text-success">Address :- {{ i.Address }}</h6>
+            {% endfor %}
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For User  Account ========== -->
+
+
+
+<!-- ========== Modal For User  PassBook ========== -->
+<div class="modal" id="UserPassBook" id="htmlContent">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-info">
+          <h4 class="modal-title text-danger fw-bold">User Account Details</h4>
+          <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"></button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            {% for i in Active_User %}
+            <h6 class="fw-bold text-warning bg-danger p-2">User :- {{ i.FullName }}</h6>
+            {% endfor %}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-primary text-light">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Date</th>
+                        <th>Transaction Id</th>
+                        <th>Transaction Amount</th>
+                        <th>Transaction Action</th>
+                        <th>Total Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in Transaction %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.Date }}</td>
+                            <td>{{ i.UserName }}</td>
+                            <td>{{ i.TransactionAmount }} Rs</td>
+                            <td>{{ i.Action }}</td>
+                            <td>{{ i.TotalAmount }} Rs</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For User  PassBook ========== -->
+
+
+
+<!-- ========== Modal For User  UserStatement ========== -->
+<div class="modal" id="UserStatement">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-info">
+          <h4 class="modal-title text-danger fw-bold">User Statements</h4>
+          <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+          <h6 class="bg-warning text-light fw-bold p-2">Total Balance :- {{ TotalAmountInDashboard }}</h6>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-primary text-light">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Transaction Id</th>
+                        <th>Transaction Amount</th>
+                        <th>Transaction Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in Transaction %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.UserName }}</td>
+                            <td>{{ i.TransactionAmount }} Rs</td>
+                            <td>{{ i.Action }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For User  UserStatement ========== -->
+
+
+
+<!-- ========== Modal For User  Funds Transfer ========== -->
+<div class="modal" id="fundsTransfer">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-info">
+        <h4 class="modal-title text-danger fw-bold">Funds Transfer</h4>
+        <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body bg-light">
+        <form action="{% url 'FundsTransfer' %}" method="post">
+          {% csrf_token %}
+          <div class="mb-3 mt-3">
+              {% if user.is_authenticated %}
+              <label for="UserName" class="form-label fw-bold">UserName:</label>
+              <input type="text" class="form-control" id="UserName" placeholder="Enter UserName" name="UserName" value="{{ user.username }}" readonly required>
+              {% endif %}
+              
+          </div>
+          <div class="mb-3 mt-3">
+              <select class="form-select" aria-label="Default select example" name="Action" required>
+                  <option value="W">WithDraw</option>
+                </select>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="sendTo" class="form-label fw-bold">Send To UserName:</label>
+              <input type="text" class="form-control" id="sendTo" placeholder="Enter Send To UserName" name="sendTo" required>
+          </div>
+          <div class="mb-3">
+              <label for="Amount" class="form-label fw-bold">Amount:</label>
+              <input type="number" class="form-control" id="Amount" placeholder="Enter Amount" name="Amount" required>
+          </div>
+          <center>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </center>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- ========== End Modal For User  Funds Transfer ========== -->
+
+

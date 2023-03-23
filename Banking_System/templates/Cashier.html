@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+<!-- ========== Page Title Block ========== -->
+{% block PageTitle %}
+Cashier Dashboard
+{% endblock PageTitle %}
+
+<!-- ========== Navigation Title Block ========== -->
+{% block NavTitle %}
+<i class="fa fa-home" style="font-size:36px"></i> Cashier Dashboard
+{% endblock NavTitle %}
+
+<!-- ========== Main Manager Content Block ========== -->
+{% block Content %}
+
+<div class="row my-2">    
+    <div class="col-md-3">
+            {% if user.is_authenticated %}
+                <div class="card bg-light text-dark mt-3">
+                    <div class="card-body">
+                       <center>
+                        <h5 class="text-warning fw-bold my-2">Username : {{ user.username }}</h5>
+                        <a class="btn btn-danger btn-sm w-100 my-2 fw-bold" href="{% url 'logout' %}">Logout</a>
+                       </center>
+                    </div>
+                </div>
+            {% endif %}
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <div class="card bg-light text-dark my-3">
+            <div class="card-body">
+               <center>
+                <a class="btn btn-success fw-bold my-1" href="" data-bs-toggle="modal" data-bs-target="#AllTransaction">All Transaction</a>
+                <a class="btn btn-success fw-bold my-1" href="" data-bs-toggle="modal" data-bs-target="#AllUser">All Accounts</a>
+                <a class="btn btn-success fw-bold my-1" href="" data-bs-toggle="modal" data-bs-target="#">Notifications</a>
+               </center>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card bg-light text-dark my-3">
+            <div class="card-body">
+                <h5 align="center">Account Information</h5><hr>
+                <form action="{% url 'ActionAmount' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3 mt-3">
+                        <label for="exampleDataList" class="form-label fw-bold">Select UserName</label>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." name="Ac_UserName">
+                        <datalist id="datalistOptions" name="Ac_UserName1" required>
+                            {% for i in AllUser %}
+                            <option value="{{ i.UserName }}">
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <select class="form-select" aria-label="Default select example" name="Action" required>
+                            <option value="W">WithDraw</option>
+                            <option value="D">Deposite</option>
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Amount" class="form-label fw-bold">Amount:</label>
+                        <input type="number" class="form-control" id="Amount" placeholder="Enter Amount" name="Amount" required>
+                    </div>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </center>
+                  </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% include "TransactionHistory.html" %}
+
+<!-- ========== Sweet Alert ========== -->
+{% for msg in messages %}
+{% if msg.tags == "success" %}
+<script>
+    swal("", "{{ msg }}", "success");
+</script>
+{% endif %}
+{% if msg.tags == "error" %}
+<script>
+    swal("Oops!", "{{ msg }}", "warning");
+</script>
+{% endif %}
+{% endfor %}
+
+<!-- ========== Sweet Alert End ========== -->
+{% endblock%}
+<!-- ========== End Main Manager Content Block ========== -->

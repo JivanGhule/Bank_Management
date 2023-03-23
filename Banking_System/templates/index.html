@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+
+<!-- ========== Page Title Block ========== -->
+{% block PageTitle %}
+Home
+{% endblock PageTitle %}
+
+<!-- ========== Navigation Title Block ========== -->
+{% block NavTitle %}
+<i class="fa fa-home" style="font-size:36px"></i> Home
+{% endblock NavTitle %}
+
+<!-- ========== Main Content Block ========== -->
+{% block Content %}
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <img src="https://th.bing.com/th/id/R.d68b753816d2ee6a2b4db41450711bbb?rik=Nxt%2bQ9t9LtGDJg&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f2016%2f07%2fSoftware-Development-PNG.png&ehk=PTmK5RqT2cLu%2b3eLJfC4ku1WUFbgtmad%2bvKZaO0jbZE%3d&risl=&pid=ImgRaw&r=0"
+                alt="Icon" height="auto" width="100%">
+        </div>
+        <div class="col-md-1"></div>
+
+        <div class="col-md-3">
+            <div class="card bg-light text-dark mt-5">
+                <div class="card-body">
+                   <center>
+                    <a class="btn btn-success fw-bold w-100 my-1" href="" data-bs-toggle="modal" data-bs-target="#UserLoginForm">User Login</a>
+                    <a class="btn btn-success fw-bold w-100 my-1" href="#">manager Login</a>
+                    <a class="btn btn-success fw-bold w-100 my-1" href="" data-bs-toggle="modal" data-bs-target="#CashierLoginForm">Cashier Login</a>
+                   </center>
+                </div>
+            </div>
+            <div class="card bg-light text-dark mt-3">
+                <div class="card-body">
+                   <center>
+                    <a class="btn btn-warning fw-bold w-100" data-bs-toggle="modal" data-bs-target="#RegistrationForm">Registration</a>
+                   </center>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <h6 class="text-light" align="justify" style="font-style: italic;">
+                    <span class="h6 text-light bg-info fw-bold">NOTE :-</span> <br>
+                    AS OF NOW WE ARE NOT OPENING MINOR ACCOUNTS, ONLY MAJOR ACCOUNTS ACCEPTED.
+                    FOR NEW ACCOUNT OPENING CLICK ON <span class="h6 text-info fw-bold">  ⟳Registration Button </span>
+                </h6>
+            </div>
+        </div>
+
+        
+
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- ========== Modal For Registration Form ========== -->
+<!-- The Modal -->
+<div class="modal" id="RegistrationForm">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-dark">
+          <h4 class="modal-title text-warning fw-bold">Registration Form</h4>
+          <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            <small class="text-danger fw-bold">*** All Feilds Are Required...!</small>
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3 mt-3">
+                    <label for="Fname" class="form-label fw-bold">Full Name:</label>
+                    <input type="text" class="form-control" id="Fname" placeholder="Enter Full Name" name="Fname" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email" class="form-label fw-bold">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tel" class="form-label fw-bold">Mobile Number:</label>
+                    <input type="tel" class="form-control" id="tel" placeholder="Enter Mobile Number" name="tel" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="AdharNo" class="form-label fw-bold">Adhar Number:</label>
+                    <input type="number" class="form-control" id="AdharNo" placeholder="Enter Adhar Number" name="AdharNo" required>
+                    <small class="text-danger">Adhar Number Must Be 12 Digit.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="Address" class="form-label fw-bold">Address:</label>
+                    <input type="text" class="form-control" id="Address" placeholder="Enter Address" name="Address" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="DOB" class="form-label fw-bold">Date Of Birth:</label>
+                    <input type="date" class="form-control" id="DOB" placeholder="Enter DOB" name="DOB" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gender" class="form-label fw-bold">Select Gender:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="Male" value="Male">
+                        <label class="form-check-label fw-bold" for="Male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="Female" value="Female">
+                        <label class="form-check-label fw-bold" for="Female">Female</label>
+                      </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="image" class="form-label fw-bold">Upload Photo:</label>
+                    <input type="file" class="form-control" id="image" placeholder="Upload image" name="image" accept="image/x-png,image/gif,image/jpeg" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="UserName" class="form-label fw-bold">UserName:</label>
+                    <input type="text" class="form-control" id="UserName" placeholder="Enter UserName" name="UserName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pwd" class="form-label fw-bold">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                    <small class="text-danger">Password Must Be Above 5 Digit.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="C_pwd" class="form-label fw-bold">Confirm Password:</label>
+                    <input type="password" class="form-control" id="C_pwd" placeholder="Enter Confirm Password" name="C_pwd" required>
+                </div>
+                <div class="d-grid my-2">
+                    <button type="submit" class="btn btn-primary btn-block my-2 fw-bold"><b>Submit</b></button>
+                </div>
+                <div class="mb-3 my-2 text-end">
+                    <small class="text-end">If you are Already Registered, <a href="" data-bs-toggle="modal" data-bs-target="#UserLoginForm" class="text-success fw-bold">Login</a> instead.</small>
+                </div>
+            </form>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For Registration Form ========== -->
+
+
+
+<!-- ========== Modal For User Login Form ========== -->
+<!-- The Modal -->
+<div class="modal" id="UserLoginForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-dark">
+          <h4 class="modal-title text-success fw-bold">User Login</h4>
+          <button type="button" class="btn-close bg-success" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            <form action="{% url 'userlogin' %}" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3 mt-3">
+                    <label for="UserName" class="form-label fw-bold">UserName:</label>
+                    <input type="text" class="form-control" id="UserName" placeholder="Enter UserName" name="L_UserName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pwd" class="form-label fw-bold">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="L_pswd" required>
+                </div>
+
+                <div class="d-grid my-2">
+                    <button type="submit" class="btn btn-primary btn-block my-2 fw-bold"><b>Login</b></button>
+                </div>
+                <div class="mb-3 my-2 text-end">
+                    <small class="text-end">If you are not Registered, <a href="" data-bs-toggle="modal" data-bs-target="#RegistrationForm" class="text-warning fw-bold">Register</a> instead.</small>
+                </div>
+            </form>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For User Login Form ========== -->
+
+
+
+<!-- ========== Modal For CashierLoginForm  Form ========== -->
+<!-- The Modal -->
+<div class="modal" id="CashierLoginForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-dark">
+          <h4 class="modal-title text-success fw-bold">Cashier Login</h4>
+          <button type="button" class="btn-close bg-success" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            <form action="{% url 'CashierLogin' %}" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3 mt-3">
+                    <label for="UserName" class="form-label fw-bold">UserName:</label>
+                    <input type="text" class="form-control" id="UserName" placeholder="Enter UserName" name="C_UserName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pwd" class="form-label fw-bold">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="C_pswd" required>
+                </div>
+
+                <div class="d-grid my-2">
+                    <button type="submit" class="btn btn-primary btn-block my-2 fw-bold"><b>Login</b></button>
+                </div>
+                <div class="mb-3 my-2 text-end">
+                    <small class="text-end">If you are User, <a href="" data-bs-toggle="modal" data-bs-target="#RegistrationForm" class="text-success fw-bold">Register</a> instead.</small>
+                </div>
+            </form>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For CashierLoginForm  Form ========== -->
+
+
+<!-- ========== Sweet Alert ========== -->
+{% for msg in messages %}
+{% if msg.tags == "success" %}
+<script>
+    swal("", "{{ msg }}", "success");
+</script>
+{% endif %}
+{% if msg.tags == "error" %}
+<script>
+    swal("Oops!", "{{ msg }}", "warning");
+</script>
+{% endif %}
+{% endfor %}
+
+<!-- ========== Sweet Alert End ========== -->
+
+{% endblock Content %}

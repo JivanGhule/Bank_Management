@@ -1,0 +1,94 @@
+<!-- ========== Modal For User  AllTransaction ========== -->
+<div class="modal" id="AllTransaction" id="htmlContent">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-info">
+          <h4 class="modal-title text-danger fw-bold">All Transaction</h4>
+          <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal"></button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-primary text-light">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Date</th>
+                        <th>Transaction Id</th>
+                        <th>Transaction Amount</th>
+                        <th>Transaction Action</th>
+                        <th>Total Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in AllTransactionHistory %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.Date }}</td>
+                            <td>{{ i.UserName }}</td>
+                            <td>{{ i.TransactionAmount }} Rs</td>
+                            <td>{{ i.Action }}</td>
+                            <td>{{ i.TotalAmount }} Rs</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For User  AllTransaction ========== -->
+
+
+
+
+<!-- ========== Modal For User  AllUser ========== -->
+<div class="modal" id="AllUser" id="htmlContent">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-info">
+          <h4 class="modal-title text-danger fw-bold">All Transaction</h4>
+          <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal"></button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body bg-light">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-primary text-light">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Gender</th>
+                        <th>Mobile No</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in AllUser %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.FullName }}</td>
+                            <td>{{ i.UserName }}</td>
+                            <td>{{ i.Gender }}</td>
+                            <td>{{ i.Mobile }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  
+  
+      </div>
+    </div>
+</div>
+<!-- ========== End Modal For User  AllUser ========== -->
